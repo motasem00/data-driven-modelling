@@ -1,3 +1,7 @@
+import pandas as pd
+import os
+import numpy as np
+
 
 class DataWrangling:
     @staticmethod
