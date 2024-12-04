@@ -27,6 +27,20 @@ def process_naics_data(pattern_data, naics_expanding):
     pattern_data.to_pickle('data/processed_data/pkl/df_simplified_naics.pickle')
     
     return pattern_data
+    
+    naics_expanding = {
+    '3330A1': {
+        'codes': ['3331', '3332', '3334', '3339'],
+        'description': [
+            'Agricultural Implement Manufacturing',
+            'Industrial Machinery Manufacturing',
+            'Metalworking Machinery Manufacturing',
+            'Other General Purpose Machinery Manufacturing'
+        ]
+    },
+    # Additional mappings with unique keys...
+}
+
 
 df_pattern = pd.DataFrame()  # Your DataFrame loading logic here
 processed_df = process_naics_data(df_pattern, naics_expanding)
