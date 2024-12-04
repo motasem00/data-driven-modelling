@@ -3,65 +3,65 @@ import os
 import numpy as np
 
 
-class DataWrangling:
-    @staticmethod
-    def expand_naics_details(pattern_data, naics_expanding):
-    # Convert 6-digit NAICS codes to 4-digit
-      expanded_rows = pattern_data[pattern_data['naics'].str.endswith('//') & (pattern_data['naics'].str.count('/') == 2)].copy()
-      expanded_rows.loc[:, 'naics'] = pattern_data['naics'].str.replace('/', '', regex=False)
-
-      # Create a dictionary for the old NAICS codes and their descriptions
-      naics_description_dict = expanded_rows.set_index('naics')['DESCRIPTION'].to_dict()
-
-      for new_naics, old_naics_list in naics_expanding.items():
-        # Assign the new `naics` code
-        expanded_rows.loc[expanded_rows['naics'].isin(old_naics_list), 'naics'] = new_naics
-            
-        # Create a description for all old codes in the format "code (description)"
-        old_descriptions = [
-            f"{code} ({naics_description_dict[code]})"
-            for code in old_naics_list
-            if code in naics_description_dict
-        ]
-            
-
-        # Create the description as a concatenated string
-        description = ', '.join(old_descriptions)
-            
-        # Set the description for all rows with the new `naics` code
-        expanded_rows.loc[expanded_rows['naics'] == new_naics, 'DESCRIPTION'] = description
-
-        # Reset index and save the processed DataFrame
-        expanded_rows.reset_index(drop=True, inplace=True)
-        expanded_rows.to_pickle('/content/data-driven-modelling/data/processed/df_pattern_expanded.pickle')
-        
-      return pd.DataFrame(expanded_rows)
-
-
 # class DataWrangling:
 #     @staticmethod
 #     def expand_naics_details(pattern_data, naics_expanding):
-#         """
-#         Expands composite NAICS codes (6 digits) into detailed codes (4 digits) for consistent analysis.
+#     # Convert 6-digit NAICS codes to 4-digit
+#       expanded_rows = pattern_data[pattern_data['naics'].str.endswith('//') & (pattern_data['naics'].str.count('/') == 2)].copy()
+#       expanded_rows.loc[:, 'naics'] = pattern_data['naics'].str.replace('/', '', regex=False)
 
-#         Args:
-#             pattern_df (DataFrame): DataFrame with NAICS codes and descriptions.
-#             naics_mapping (dict): Mapping of composite NAICS codes to detailed codes and descriptions.
+#       # Create a dictionary for the old NAICS codes and their descriptions
+#       naics_description_dict = expanded_rows.set_index('naics')['DESCRIPTION'].to_dict()
 
-#         Returns:
-#             DataFrame: Updated DataFrame with expanded NAICS details.
-#         """
-#         expanded_rows = []
-#         for _, row in pattern_data.iterrows():
-#             if row['naics'] in naics_expanding:
-#                 for code, desc in zip(naics_expanding[row['naics']]['codes'],naics_expanding[row['naics']]['description']):
-#                     new_row = row.copy()
-#                     new_row['naics'] = code
-#                     new_row['DESCRIPTION'] = desc
-#                     expanded_rows.append(new_row)
-#             else:
-#                 expanded_rows.append(row)
-#         return pd.DataFrame(expanded_rows)
+#       for new_naics, old_naics_list in naics_expanding.items():
+#         # Assign the new `naics` code
+#         expanded_rows.loc[expanded_rows['naics'].isin(old_naics_list), 'naics'] = new_naics
+            
+#         # Create a description for all old codes in the format "code (description)"
+#         old_descriptions = [
+#             f"{code} ({naics_description_dict[code]})"
+#             for code in old_naics_list
+#             if code in naics_description_dict
+#         ]
+            
+
+#         # Create the description as a concatenated string
+#         description = ', '.join(old_descriptions)
+            
+#         # Set the description for all rows with the new `naics` code
+#         expanded_rows.loc[expanded_rows['naics'] == new_naics, 'DESCRIPTION'] = description
+
+#         # Reset index and save the processed DataFrame
+#         expanded_rows.reset_index(drop=True, inplace=True)
+#         expanded_rows.to_pickle('/content/data-driven-modelling/data/processed/df_pattern_expanded.pickle')
+        
+#       return pd.DataFrame(expanded_rows)
+
+
+class DataWrangling:
+    @staticmethod
+    def expand_naics_details(pattern_data, naics_expanding):
+        """
+        Expands composite NAICS codes (6 digits) into detailed codes (4 digits) for consistent analysis.
+
+        Args:
+            pattern_df (DataFrame): DataFrame with NAICS codes and descriptions.
+            naics_mapping (dict): Mapping of composite NAICS codes to detailed codes and descriptions.
+
+        Returns:
+            DataFrame: Updated DataFrame with expanded NAICS details.
+        """
+        expanded_rows = []
+        for _, row in pattern_data.iterrows():
+            if row['naics'] in naics_expanding:
+                for code, desc in zip(naics_expanding[row['naics']]['codes'],naics_expanding[row['naics']]['description']):
+                    new_row = row.copy()
+                    new_row['naics'] = code
+                    new_row['DESCRIPTION'] = desc
+                    expanded_rows.append(new_row)
+            else:
+                expanded_rows.append(row)
+        return pd.DataFrame(expanded_rows)
 
     @staticmethod
     def merge_and_clean_data(gdp_df, pattern_df, naics_expanding):
