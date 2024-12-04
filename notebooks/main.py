@@ -3,13 +3,13 @@ class DataWrangling:
     @staticmethod
     def expand_naics_details(pattern_data, naics_expanding):
     # Convert 6-digit NAICS codes to 4-digit
-    expanded_rows = pattern_data[pattern_data['naics'].str.endswith('//') & (pattern_data['naics'].str.count('/') == 2)].copy()
-    expanded_rows.loc[:, 'naics'] = pattern_data['naics'].str.replace('/', '', regex=False)
+      expanded_rows = pattern_data[pattern_data['naics'].str.endswith('//') & (pattern_data['naics'].str.count('/') == 2)].copy()
+      expanded_rows.loc[:, 'naics'] = pattern_data['naics'].str.replace('/', '', regex=False)
 
-    # Create a dictionary for the old NAICS codes and their descriptions
-    naics_description_dict = expanded_rows.set_index('naics')['DESCRIPTION'].to_dict()
+      # Create a dictionary for the old NAICS codes and their descriptions
+      naics_description_dict = expanded_rows.set_index('naics')['DESCRIPTION'].to_dict()
 
-    for new_naics, old_naics_list in naics_expanding.items():
+      for new_naics, old_naics_list in naics_expanding.items():
         # Assign the new `naics` code
         expanded_rows.loc[expanded_rows['naics'].isin(old_naics_list), 'naics'] = new_naics
             
@@ -31,7 +31,7 @@ class DataWrangling:
         expanded_rows.reset_index(drop=True, inplace=True)
         expanded_rows.to_pickle('/content/data-driven-modelling/data/processed/df_pattern_expanded.pickle')
         
-    return pd.DataFrame(expanded_rows)
+      return pd.DataFrame(expanded_rows)
 
 
 # class DataWrangling:
