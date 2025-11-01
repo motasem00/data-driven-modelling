@@ -2,36 +2,6 @@
 
 This project processes economic indicators from two U.S. sources, enriching them with expert knowledge. It prioritizes features, analyzes clusters of U.S. counties, and identifies potential sales regions for specific products across the country.
 
-## Project structure
-
-Sales-Potential-Estimation-Data-Quality-Visualization/
-
-├── notebooks_and_data/
-│ ├── data/
-│ │ ├── original_data/
-│ │ │ ├── pkl/
-│ │ │ ├── txt/
-│ │ │ └── xlsx/
-│ │ ├── processed_data/
-│ │ │ ├── batch_ids/
-│ │ │ ├── json/
-│ │ │ ├── melted_data/
-│ │ │ └── pkl/
-│ ├── my_functions/
-│ │ ├── functions_data_enrichment.py
-│ │ ├── functions_data_linking.py
-│ │ ├── functions_feature_selection.py
-│ │ └── functions_tsne_analysis.py
-│ ├── data_linking_ipynb/
-│ ├── data_enrichment_ipynb/
-│ ├── feature_selection_ipynb/
-│ └── t-sne_analysis_ipynb/
-└── README.md
-
-### Repository Structure
-
-Each group will later receive a folder named after its group and will work within this folder. The following components should be found in each folder:
-
 ### Description of Main Folders
 
 - **data/**: This folder contains all datasets. The data is divided into:
@@ -80,4 +50,5 @@ Everything below is valid after the formation of the groups.
 ## Contact and Support
 
 For questions or issues, you can reach out to **[Lukas Bader]** or create an **Issue** in the repository.
+
 
