@@ -1,10 +1,32 @@
-# Data Driven Modeling WS24/25
+# Sales-Potential-Estimation-Data-Quality-Visualization
 
-Welcome to the repository for the Data Science projects of the course **[Data Driven Modeling WS2425]** at **[TH Köln]**. This repository serves as a workspace for the different groups of the course to develop, document, and share their projects with the course instructors and other participants.
+This project processes economic indicators from two U.S. sources, enriching them with expert knowledge. It prioritizes features, analyzes clusters of U.S. counties, and identifies potential sales regions for specific products across the country.
 
-## Overview
+## Project structure
 
-In this repository, each group has its own section to work on their projects. Each group is responsible for managing their files, code, and documentation within their assigned folder.
+Sales-Potential-Estimation-Data-Quality-Visualization/
+
+├── notebooks_and_data/
+│ ├── data/
+│ │ ├── original_data/
+│ │ │ ├── pkl/
+│ │ │ ├── txt/
+│ │ │ └── xlsx/
+│ │ ├── processed_data/
+│ │ │ ├── batch_ids/
+│ │ │ ├── json/
+│ │ │ ├── melted_data/
+│ │ │ └── pkl/
+│ ├── my_functions/
+│ │ ├── functions_data_enrichment.py
+│ │ ├── functions_data_linking.py
+│ │ ├── functions_feature_selection.py
+│ │ └── functions_tsne_analysis.py
+│ ├── data_linking_ipynb/
+│ ├── data_enrichment_ipynb/
+│ ├── feature_selection_ipynb/
+│ └── t-sne_analysis_ipynb/
+└── README.md
 
 ### Repository Structure
 
@@ -58,3 +80,4 @@ Everything below is valid after the formation of the groups.
 ## Contact and Support
 
 For questions or issues, you can reach out to **[Lukas Bader]** or create an **Issue** in the repository.
+
